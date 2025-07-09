@@ -68,10 +68,10 @@ class WebSearchProcessor:
         # Invoke the LLM to process the results
         response = self.llm.invoke(llm_prompt)
         
-        return response
+        return response.content
     
-if __name__ == "__main__":
-    websearch_config = WebSearchConfig()
-    websearch_agent = WebSearchProcessor(websearch_config)
-    response = websearch_agent.process_web_results(query="Tell me about nipah virus")
-    print(response)
+# if __name__ == "__main__":
+#     websearch_config = WebSearchConfig()
+#     websearch_agent = WebSearchProcessor(websearch_config)
+#     response = websearch_agent.process_web_results(query="Tell me about nipah virus")
+#     print(response)
