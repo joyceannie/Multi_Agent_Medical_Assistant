@@ -37,5 +37,13 @@ class WebSearchConfig:
             api_key = os.getenv("openai_api_key"),  # Replace with your Azure OpenAI API key
             temperature = 0.3  # Slightly creative but factual
         )
-        self.context_limit = 20        
+        self.context_limit = 20     
+
+class Config:
+    def __init__(self):
+        self.agent_decision = AgentDecisoinConfig()
+        self.conversation = ConversationConfig()
+        self.web_search = WebSearchConfig()
+        self.tavily_api_key = os.getenv("TAVILY_API_KEY")
+        self.max_conversation_history = 20  # Include last 20 messsages (10 Q&A pairs) in history   
 
