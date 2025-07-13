@@ -1,4 +1,9 @@
 langchain==0.3.20
 langchain-community==0.3.19
-langchain-core==0.3.44
+langchain-core
 langchain-openai
+docling==2.31.0
+docling-core==2.28.1
+docling-ibm-models==3.4.2
+docling-parse==4.0.1
+fastapi[all]

@@ -81,17 +81,7 @@ async def chat_with_assistant(request: ChatRequest):
     """
     try:
         langgraph_app = get_langgraph_app()
-
-        # Call the processing function from your Langgraph workflow
-        # The `process_query` function in your `agent_workflow.py` returns the final `result` dictionary.
-        # We need to extract the `output` and `agent_name` from this `result`.
-        
-        # NOTE: The `process_query` in your provided `agent_workflow.py` uses a fixed `thread_config`.
-        # To make the FastAPI server support multiple concurrent conversations (threads),
-        # you *must* modify `process_query` in `agent_workflow.py` to accept `thread_id`
-        # and pass it to `graph.invoke(state, {"configurable": {"thread_id": thread_id}})`.
-        # For this example, it will always use thread "1" for persistence.
-        
+      
         final_state = langgraph_app.invoke(
             input={
                 "messages": [request.query if isinstance(request.query, str) else request.query.get("text", "")],
