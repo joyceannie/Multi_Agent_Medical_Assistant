@@ -11,6 +11,22 @@ from langgraph.graph import MessagesState, StateGraph, START, END
 from langgraph.checkpoint.memory import MemorySaver
 from typing import Dict, List, Optional, Any, Literal, TypedDict, Union, Annotated
 from agents.web_search_agent.web_search_processor import WebSearchProcessor
+from langgraph.graph.message import AnyMessage
+from typing import Annotated
+from langgraph.graph.message import add_messages
+from typing_extensions import TypedDict
+from langgraph.graph import StateGraph, START, END
+from langgraph.graph.message import add_messages
+
+
+class State(TypedDict):
+    # Messages have the type "list". The `add_messages` function
+    # in the annotation defines how this state key should be updated
+    # (in this case, it appends messages to the list, rather than overwriting them)
+    messages: Annotated[list, add_messages]
+
+
+graph_builder = StateGraph(State)
 from config.config import Config
 from dotenv import load_dotenv
 
@@ -60,7 +76,7 @@ class AgentConfig:
     }}
     """
 
-class AgentState(MessagesState):
+class AgentState(MessagesState[AnyMessage]):
     """State maintained across the workflow."""
     agent_name: Optional[str]  # Current active agent
     current_input: Optional[Union[str, Dict]]  # Input to be processed
@@ -265,6 +281,7 @@ def create_agent_graph():
 
 
     # Create the workflow graph
+    print("Creating workflow")
     workflow = StateGraph(AgentState)
 
     # Add nodes for each step
@@ -294,6 +311,7 @@ def create_agent_graph():
 
     # Compile the graph
     app = workflow.compile(checkpointer=memory)
+    print("Returning graph")
     return app
 
 def init_agent_state() -> AgentState:

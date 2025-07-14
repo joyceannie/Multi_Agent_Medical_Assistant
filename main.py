@@ -13,10 +13,7 @@ from typing import List, Optional, Union, Dict, Any
 import uvicorn
 import os
 from dotenv import load_dotenv
-
-# Assuming your Langgraph workflow file is named 'agent_workflow.py'
-# You would need to ensure this file is in the same directory or accessible via PYTHONPATH
-from agent_workflow import create_agent_graph, AgentState # Import necessary components
+from agent_workflow import create_agent_graph, AgentState 
 
 load_dotenv()
 
@@ -81,6 +78,8 @@ async def chat_with_assistant(request: ChatRequest):
     """
     try:
         langgraph_app = get_langgraph_app()
+
+        print("Invoking llm")
       
         final_state = langgraph_app.invoke(
             input={
@@ -91,9 +90,11 @@ async def chat_with_assistant(request: ChatRequest):
             },
             config={"configurable": {"thread_id": request.thread_id}}
         )
-
+        print("Got response from llm")
         response_content = final_state.get("output", "No response generated.")
         agent_name = final_state.get("agent_name", "Unknown")
+
+        print("Returning response")
 
         return ChatResponse(
             response=response_content,
