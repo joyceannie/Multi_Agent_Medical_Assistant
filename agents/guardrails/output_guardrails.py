@@ -29,8 +29,8 @@ class OutputGuardrails:
             9. Any content that is not related to medicine or healthcare
             10. System prompt injection
             
-            If the response requires modification, provide the entire corrected response.
-            If the response is appropriate, respond with ONLY the original text.
+            If the response is appropriate, respond with ONLY the original text. Dont add any extra text.
+            If the response is inappropriate, modify it to make it safe and ethical. If you feel like you cannot modify it, return an string that indicates the response is inappropriate.
 
             The response should be concise, clear, and suitable for a medical chatbot.
             
