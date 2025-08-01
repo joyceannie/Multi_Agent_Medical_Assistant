@@ -9,3 +9,9 @@ docling-parse==4.0.1
 uvicorn[standard]
 fastapi[all]
 langgraph
+ipykernel
+langchain-qdrant==0.2.0
+qdrant-client==1.13.3
+sentence-transformers==3.4.1
+fastembed==0.6.1
+

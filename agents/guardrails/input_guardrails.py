@@ -98,5 +98,7 @@ class InputGuardrails:
             reason = result.split(":", 1)[1].strip() if ":" in result else "Content policy violation"
             return False, AIMessage(content = f"I cannot process this request. Reason: {reason}")
         
+        print(f"Input Guardrails Result: {result}")
+        
         return True, user_input
 

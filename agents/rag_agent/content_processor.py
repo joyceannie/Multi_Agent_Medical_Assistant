@@ -1,7 +1,7 @@
 import re
 import logging
 from typing import List, Dict, Any, Optional, Tuple
-
+import time
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_openai.chat_models.base import ChatOpenAI
@@ -62,6 +62,7 @@ class ContentProcessor:
             try:
                 summary = summary_chain.invoke({"image": image})
                 results.append(summary)
+                time.sleep(2)  # Rate limiting to avoid hitting API limits
             except Exception as e:
                 # Log the error if needed
                 print(f"Error processing image: {str(e)}")

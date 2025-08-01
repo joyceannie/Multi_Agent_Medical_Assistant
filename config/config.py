@@ -20,23 +20,23 @@ load_dotenv()
 class AgentDecisoinConfig:
     def __init__(self):
         self.llm = ChatOpenAI(
-            model = os.getenv("model_name"),  # Replace with your model name
-            api_key = os.getenv("openai_api_key"),  # Replace with your  OpenAI API key
+            model = os.getenv("MODEL_NAME"),  # Replace with your model name
+            api_key = os.getenv("OPENAI_API_KEY"),  # Replace with your  OpenAI API key
         )
 
 class ConversationConfig:
     def __init__(self):
         self.llm = ChatOpenAI(
-            model_name = os.getenv("model_name"),  # Replace with your model name
-            api_key = os.getenv("openai_api_key"),  # Replace with your OpenAI API key
+            model_name = os.getenv("MODEL_NAME"),  # Replace with your model name
+            api_key = os.getenv("OPENAI_API_KEY"),  # Replace with your OpenAI API key
             temperature = 0.7  # Creative but factual
         )
 
 class WebSearchConfig:
     def __init__(self):
         self.llm = ChatOpenAI(
-            model = os.getenv("model_name"),  # Replace with your model name
-            api_key = os.getenv("openai_api_key"),  # Replace with your Azure OpenAI API key
+            model = os.getenv("MODEL_NAME"),  # Replace with your model name
+            api_key = os.getenv("OPENAI_API_KEY"),  # Replace with your Azure OpenAI API key
             temperature = 0.3  # Slightly creative but factual
         )
         self.context_limit = 20     
@@ -59,28 +59,28 @@ class RAGConfig:
         # self.embedding_model = "text-embedding-3-large"
         # Initialize Azure OpenAI Embeddings
         self.embedding_model = OpenAIEmbeddings(
-            model = os.getenv("embedding_model_name"),  # Replace with your  model name
-            api_key = os.getenv("openai_api_key"),  # Replace with your  OpenAI API key
+            model = os.getenv("EMBEDDING_MODEL_NAME"),  # Replace with your  model name
+            api_key = os.getenv("OPENAI_API_KEY"),  # Replace with your  OpenAI API key
         )
 
         self.llm = ChatOpenAI(
-            model = os.getenv("model_name"),  # Replace with your model name
-            api_key = os.getenv("openai_api_key"),  # Replace with your  OpenAI API key
+            model = os.getenv("MODEL_NAME"),  # Replace with your model name
+            api_key = os.getenv("OPENAI_API_KEY"),  # Replace with your  OpenAI API key
             temperature = 0.3  # Slightly creative but factual
         )
         self.summarizer_model = ChatOpenAI(
-            model_name = os.getenv("model_name"),  # Replace with your  model name
-            api_key = os.getenv("openai_api_key"),  # Replace with your OpenAI API key
+            model_name = os.getenv("MODEL_NAME"),  # Replace with your  model name
+            api_key = os.getenv("OPENAI_API_KEY"),  # Replace with your OpenAI API key
             temperature = 0.5  # Slightly creative but factual
         )
         self.chunker_model = ChatOpenAI(
-            model_name = os.getenv("model_name"),  # Replace with your model name
-            api_key = os.getenv("openai_api_key"),  # Replace with your Azure OpenAI API key
+            model_name = os.getenv("MODEL_NAME"),  # Replace with your model name
+            api_key = os.getenv("OPENAI_API_KEY"),  # Replace with your Azure OpenAI API key
             temperature = 0.0  # factual
         )
         self.response_generator_model = ChatOpenAI(
-            model_name = os.getenv("model_name"),  # Replace with your Azure model name
-            api_key = os.getenv("openai_api_key"),  # Replace with your Azure OpenAI API key
+            model_name = os.getenv("MODEL_NAME"),  # Replace with your Azure model name
+            api_key = os.getenv("OPENAI_API_KEY"),  # Replace with your Azure OpenAI API key
             temperature = 0.3  # Slightly creative but factual
         )
         self.top_k = 5
@@ -99,6 +99,22 @@ class RAGConfig:
         self.min_retrieval_confidence = 0.40  # The auto routing from RAG agent to WEB_SEARCH agent is dependent on this value
 
         self.context_limit = 20     # include last 20 messsages (10 Q&A pairs) in history 
+
+class InputGuardrailsConfig:
+    def __init__(self):
+        self.llm = ChatOpenAI(
+            model = os.getenv("MODEL_NAME"), 
+            api_key = os.getenv("OPENAI_API_KEY"), 
+            temperature = 0.0  # Factual and strict
+        )
+
+class OutputGuardrailsConfig:
+    def __init__(self):
+        self.llm = ChatOpenAI(
+            model = os.getenv("MODEL_NAME"),  
+            api_key = os.getenv("OPENAI_API_KEY"),  
+            temperature = 0.0  # Factual and strict
+        )       
 
 class Config:
     def __init__(self):

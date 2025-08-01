@@ -31,6 +31,8 @@ class OutputGuardrails:
             
             If the response requires modification, provide the entire corrected response.
             If the response is appropriate, respond with ONLY the original text.
+
+            The response should be concise, clear, and suitable for a medical chatbot.
             
             REVISED RESPONSE:
             """
@@ -64,6 +66,8 @@ class OutputGuardrails:
             "output": output_text,
             "user_input": user_input
         })
+
+        print(f"Output Guardrails Result: {result}")
         
         return result           
     

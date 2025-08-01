@@ -8,4 +8,7 @@ The web search agent is used to answer queries using web searches. Tavily search
 2. Conversational Agent
 The conversational agent uses the underlying LLM to generate responses for general queries like greeting that doesn't need any specialized knowledge. 
 
-3. RAG Agent
+3. Guardails Agent
+4. RAG Agent
+
+
